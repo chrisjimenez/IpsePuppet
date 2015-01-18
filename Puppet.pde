@@ -1,3 +1,10 @@
+/************************************************
+*  Puppet.pde
+*  IpsePuppet project
+*  By Chris Jimenez
+*  
+*************************************************/
+
 class Puppet {
   float xPos;
   float yPos;
@@ -11,7 +18,9 @@ class Puppet {
 
   FBox head, midsection, leftArm, rightArm, leftLeg, rightLeg;
 
-  //constructor for image puppet
+  /**
+  *  CONSTRUCTOR
+  */
   Puppet(PImage h, PImage m, PImage la, PImage ra, PImage ll, PImage rl) {
     headImage = h;
     midsectionImage = m;
@@ -24,77 +33,80 @@ class Puppet {
     setupGamePuppet();
   }
 
-  //===========================================================
-  //second constructor to create generic puppet
+  /**
+  *  CONSTRUCTOR
+  *  second constructor to create generic puppet
+  */
   Puppet() {
     setupGenericPuppet();
   }
 
-  //=============================================================================
-  // create generic puppet
+  /**
+  * creates generic puppet
+  */
   void setupGenericPuppet() {
     xPos = width/2 - 22;
     yPos = height/2- 40;
 
-    //head
+    // head
     head = new FBox(45, 45);
     head.setPosition(xPos, yPos);
     head.setStroke(255, 0, 0);
 
-    //midsection
+    // midsection
     midsection = new FBox(90, 160);
     midsection.setStroke(255, 0, 0);
     midsection.setPosition(xPos - 45, yPos +90);
 
-    //left arm
+    // left arm
     leftArm = new FBox(30, 100);
     leftArm.setStroke(255, 0, 0);
     leftArm.setPosition(xPos - 15, yPos +90);
 
-    //right arm
+    // right arm
     rightArm = new FBox(30, 100);
     rightArm.setStroke(255, 0, 0);
     rightArm.setPosition(xPos +60, yPos +90);
 
-    //left leg
+    // left leg
     leftLeg = new FBox(40, 120);
     leftLeg.setStroke(255, 0, 0);
 
-    //right leg
+    // right leg
     rightLeg = new FBox(40, 120);
     rightLeg.setStroke(255, 0, 0);
 
-    //joint between head and midsection
+    // joint between head and midsection
     FDistanceJoint jointHeadToMidsection = new FDistanceJoint(head, midsection);
     jointHeadToMidsection.setLength(0);
     jointHeadToMidsection.setAnchor1(0, head.getHeight()/2);
     jointHeadToMidsection.setAnchor2(0, -1*midsection.getHeight()/2);
 
-    //joint between left arm and midsection
+    // joint between left arm and midsection
     FDistanceJoint jointLeftArmAndMidsection = new FDistanceJoint(leftArm, midsection) ;
     jointLeftArmAndMidsection.setLength(0);
     jointLeftArmAndMidsection.setAnchor1(leftArm.getWidth()/2, -1*leftArm.getHeight()/2);
     jointLeftArmAndMidsection.setAnchor2(-1*midsection.getWidth()/2, -1*midsection.getHeight()/2);
 
-    //joint between right arm and midsection
+    // joint between right arm and midsection
     FDistanceJoint jointRightArmAndMidsection = new FDistanceJoint(rightArm, midsection) ;
     jointRightArmAndMidsection.setLength(0);
     jointRightArmAndMidsection.setAnchor1(-1*rightArm.getWidth()/2, -1*rightArm.getHeight()/2);
     jointRightArmAndMidsection.setAnchor2(midsection.getWidth()/2, -1*midsection.getHeight()/2);
 
-    //joint between left leg and midsection
+    // joint between left leg and midsection
     FDistanceJoint jointLeftLegAndMidsection = new FDistanceJoint(leftLeg, midsection);
     jointLeftLegAndMidsection.setLength(0);
     jointLeftLegAndMidsection.setAnchor1(-1*leftLeg.getWidth()/2, -1*leftLeg.getHeight()/2);
     jointLeftLegAndMidsection.setAnchor2(-1*midsection.getWidth()/2, midsection.getHeight()/2);
 
-    //joint between right leg and midsection
+    // joint between right leg and midsection
     FDistanceJoint jointRightLegAndMidsection = new FDistanceJoint(rightLeg, midsection);
     jointRightLegAndMidsection.setLength(0);
     jointRightLegAndMidsection.setAnchor1(rightLeg.getWidth()/2, -1*rightLeg.getHeight()/2);
     jointRightLegAndMidsection.setAnchor2(midsection.getWidth()/2, midsection.getHeight()/2);
 
-    //add puppet bodies ot the fisica world
+    // add puppet bodies ot the fisica world
     menuWorld.add(head);
     menuWorld.add(midsection);
     menuWorld.add(leftArm);
@@ -102,7 +114,7 @@ class Puppet {
     menuWorld.add(leftLeg);
     menuWorld.add(rightLeg);
 
-    //Construct a revolute joint between two bodies given an anchor position.
+    // Construct a revolute joint between two bodies given an anchor position.
     menuWorld.add(jointHeadToMidsection);
     menuWorld.add(jointLeftArmAndMidsection);
     menuWorld.add(jointRightArmAndMidsection);
@@ -110,80 +122,81 @@ class Puppet {
     menuWorld.add(jointRightLegAndMidsection);
   }
 
-  //==============================================================================
-  //set up the puppet with image of seclected body part images
+  /**
+  *  set up the puppet with image of seclected body part images
+  */
   void setupImagePuppet() {
     xPos = width/2 - headImage.width/2;
     yPos = height/2 - 40;
 
     removeGreenBackground(headImage);
 
-    //head
+    // head
     head = new FBox(headImage.width, headImage.height);
     head.setPosition(xPos, yPos);
     head.attachImage(headImage);
 
-    //midsection
+    // midsection
     midsection = new FBox(midsectionImage.width, midsectionImage.height);
     midsection.setPosition(xPos - midsectionImage.width/2, yPos +headImage.height);
     midsection.setImageAlpha(0);
     midsection.setNoStroke();
 
-    //left arm
+    // left arm
     leftArm = new FBox(leftArmImage.width, leftArmImage.height);
     leftArm.setPosition(xPos - midsectionImage.width/2 - leftArmImage.width, yPos +headImage.height);
     leftArm.setImageAlpha(0);
     leftArm.setNoStroke();
 
-    //right arm
+    // right arm
     rightArm = new FBox(rightArmImage.width, rightArmImage.height);
     rightArm.setPosition(xPos + midsectionImage.width/2 + leftArmImage.width, yPos +headImage.height);
     rightArm.setImageAlpha(0);
     rightArm.setNoStroke();
 
-    //left leg
+    // left leg
     leftLeg = new FBox(leftLegImage.width, leftLegImage.height);
     leftLeg.setPosition(xPos - midsectionImage.width/2, yPos +headImage.height+midsectionImage.height);
     leftLeg.setImageAlpha(0);
     leftLeg.setNoStroke();
 
-    //right leg
+    // right leg
     rightLeg = new FBox(rightLegImage.width, rightLegImage.height);
     rightLeg.setPosition(xPos - midsectionImage.width/2, yPos +headImage.height+midsectionImage.height);
     rightLeg.setImageAlpha(0);
     rightLeg.setNoStroke();
 
-    //joint between head and midsection
+    // joint between head and midsection
     FDistanceJoint jointHeadToMidsection = new FDistanceJoint(head, midsection);
     jointHeadToMidsection.setLength(0);
     jointHeadToMidsection.setAnchor1(0, head.getHeight()/2);
     jointHeadToMidsection.setAnchor2(0, -1*midsection.getHeight()/2);
 
-    //joint between left arm and midsection
+    // joint between left arm and midsection
     FDistanceJoint jointLeftArmAndMidsection = new FDistanceJoint(leftArm, midsection) ;
     jointLeftArmAndMidsection.setLength(0);
     jointLeftArmAndMidsection.setAnchor1(leftArm.getWidth()/2, -1*leftArm.getHeight()/2);
     jointLeftArmAndMidsection.setAnchor2(-1*midsection.getWidth()/2, -1*midsection.getHeight()/2);
 
-    //joint between right arm and midsection
+    // joint between right arm and midsection
     FDistanceJoint jointRightArmAndMidsection = new FDistanceJoint(rightArm, midsection) ;
     jointRightArmAndMidsection.setLength(0);
     jointRightArmAndMidsection.setAnchor1(-1*rightArm.getWidth()/2, -1*rightArm.getHeight()/2);
     jointRightArmAndMidsection.setAnchor2(midsection.getWidth()/2, -1*midsection.getHeight()/2);
 
-    //joint between left leg and midsection
+    // joint between left leg and midsection
     FDistanceJoint jointLeftLegAndMidsection = new FDistanceJoint(leftLeg, midsection);
     jointLeftLegAndMidsection.setLength(0);
     jointLeftLegAndMidsection.setAnchor1(-1*leftLeg.getWidth()/2, -1*leftLeg.getHeight()/2);
     jointLeftLegAndMidsection.setAnchor2(-1*midsection.getWidth()/2, midsection.getHeight()/2);
 
-    //joint between right leg and midsection
+    // joint between right leg and midsection
     FDistanceJoint jointRightLegAndMidsection = new FDistanceJoint(rightLeg, midsection);
     jointRightLegAndMidsection.setLength(0);
     jointRightLegAndMidsection.setAnchor1(rightLeg.getWidth()/2, -1*rightLeg.getHeight()/2);
     jointRightLegAndMidsection.setAnchor2(midsection.getWidth()/2, midsection.getHeight()/2);
 
-    //add puppet bodies ot the fisica world
+    // add puppet bodies ot the fisica world
     world.add(head);
     world.add(midsection);
     world.add(leftArm);
@@ -191,7 +204,7 @@ class Puppet {
     world.add(leftLeg);
     world.add(rightLeg);
 
-    //Construct a revolute joint between two bodies given an anchor position.
+    // Construct a revolute joint between two bodies given an anchor position.
     world.add(jointHeadToMidsection);
     world.add(jointLeftArmAndMidsection);
     world.add(jointRightArmAndMidsection);
@@ -199,9 +212,10 @@ class Puppet {
     world.add(jointRightLegAndMidsection);
   }
 
-  //============================================
-  // creates the 8 bit image of the given image on the
-  // fisica box
+  /**
+  *  creates the 8 bit image of the given image on the
+  *  fisica box
+  */
   void createCubes(FBox box, PImage image) {
     int step = 3;
     int boxDepth = 40;
@@ -209,7 +223,7 @@ class Puppet {
     pushMatrix();
     translate(box.getX(), box.getY(), 0);
 
-    //rotate all boxes
+    // rotate all boxes
     rotate(box.getRotation());
 
     for (int x = 0; x < image.width; x+=step) {
@@ -235,13 +249,10 @@ class Puppet {
   }
   
   
-  
-  void setupGamePuppet(){
-    
-    
-  }
-
-  //=========================================================
+ 
+  /**
+  *  Displays the puppet.
+  */
   void display() {
     createCubes(midsection, midsectionImage);
     createCubes(leftArm, leftArmImage);
@@ -250,7 +261,9 @@ class Puppet {
     createCubes(rightLeg, rightLegImage);
   }
 
-  //removes green background of user body images
+  /**
+  *  removes green background of user body images
+  */
   void removeGreenBackground(PImage i) {
 
     i.loadPixels();

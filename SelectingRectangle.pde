@@ -1,3 +1,10 @@
+/************************************************
+*  SelectingRectangle.pde
+*  IpsePuppet project
+*  By Chris Jimenez
+*  
+*************************************************/
+
 class SelectingRectangle {
   int xPos;
   int yPos;
@@ -11,7 +18,9 @@ class SelectingRectangle {
 
   String label;
 
-  //constructor
+  /**
+  *  CONSTRUCTOR
+  */
   SelectingRectangle(String s, int x, int y, int w, int h) {
     label = s;
     xPos = x;
@@ -23,8 +32,9 @@ class SelectingRectangle {
     cornerY = y + rectHeight;
   }
 
-  //========================================================
-  //display() function
+  /**
+  *  Displays selecting triangle
+  */
   void display() {
     stroke(255, 0, 0);
     strokeWeight(2);
@@ -44,8 +54,9 @@ class SelectingRectangle {
   }
 
 
-  //=======================================================
-  //determines if rectangle is pressed
+  /**
+  *  Determines if the mouse is over the selected rectangle
+  */
   boolean mouseOver(float x, float y, float w, float h) {
     if (((mouseX >= x) && (mouseX <= x+w)) &&
       ((mouseY >= y) && (mouseY <=y+h))) 
@@ -54,8 +65,9 @@ class SelectingRectangle {
       return false;
   }
 
-  //=======================================================
-  //drags selecting rectangle
+  /**
+  *  Drags selected rectangle
+  */
   void drag() {
     int xDist = mouseX - pmouseX;
     int yDist = mouseY - pmouseY;

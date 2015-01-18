@@ -1,3 +1,10 @@
+/************************************************
+*  ImageButton.pde
+*  IpsePuppet project
+*  By Chris Jimenez
+*  
+*************************************************/
+
 class ImageButton {
   int yPos;
   int xPos;
@@ -9,24 +16,27 @@ class ImageButton {
   PImage currentButton;
   boolean pressed;
 
-  //=========================================================
-  //constructor
+   /**
+   *  CONSTRUCTOR
+   */
   ImageButton(PImage buttonImage, PImage buttonPressedImage) {
     button = buttonImage;
     buttonPressed = buttonPressedImage;
     currentButton = button;
   }
 
-  //========================================================
-  //displays button at position x,y
+  /**
+  *  displays button at position x,y
+  */
   void display(int x, int y) {
     xPos = x;
     yPos = y;
     image(currentButton, x, y);
   }
 
-  //=======================================================
-  //resize the button using given width(w) & height(h)
+  /**
+  *  resize the button using given width(w) & height(h)
+  */
   void resizeButton(int w, int h) { 
     buttonWidth = w;
     buttonHeight = h;
@@ -34,15 +44,15 @@ class ImageButton {
     buttonPressed.resize(buttonWidth, buttonHeight);
   }
 
-  //=======================================================
-  //determiness if button is pressed
+  /**
+  *  determines if button is pressed
+  */
   boolean isPressed() {
     if (((mouseX >= xPos) && (mouseX <= xPos+buttonWidth)) &&
       ((mouseY >= yPos) && (mouseY <=yPos+buttonHeight))) {
       currentButton = buttonPressed;
       return true;
-    }
-    else {
+    } else {
       currentButton = button;
       return false;
     }
