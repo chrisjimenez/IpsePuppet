@@ -29,7 +29,6 @@ The user is given 30 seconds to score as many points as they could.
 
 The game is over once the time is up but they do have the option to play again. 
 
-game over
 
 ### Challenges
 
