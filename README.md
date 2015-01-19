@@ -48,7 +48,5 @@ Last but not least, the Kinect itself.
 Although playing with the Kinect was really fun, there was moments when it would disable the IO of the computer(keyboard and trackpad/mouse), making it completely useless! 
 The only solution was to restart the machine every time. This only happened once in a while.
 
-
-— I had a great time using the Kinect and its unique features and I’re extremely satisfied with the end result! 
-And the program lends itself to amendments, such as more games and situations for the puppet.
+You could check out a video demo [here](https://www.youtube.com/watch?v=h0LGRfBc6Eo)
 
