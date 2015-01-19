@@ -32,11 +32,11 @@ The game is over once the time is up but they do have the option to play again.
 
 ### Challenges
 
-Our first challenge was actually scanning the users body and extracting the PImage’s of each of their limbs. 
+The first challenge was actually scanning the users body and extracting the PImage’s of each of their limbs. 
 Originally this was going to be an automatic operation done by the program. 
 But I thought it would’ve been easier, and the user would’ve preferred, to have the limbs “selected” using the selecting rectangles, which can be seen above.
 
-Our second challenge was actually extracting the images and creating a 3D effect on the puppet using those images. 
+The second challenge was actually extracting the images and creating a 3D effect on the puppet using those images. 
 Attaching the images to the FBox wasn’t an issue, since there was already a function for that. 
 But making it look 3D was difficult, since fisica only works in 2D. 
 The way I worked around this was by using the box() function. 
